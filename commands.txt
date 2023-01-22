@@ -1,0 +1,35 @@
+Minicube-
+eval $(minikube docker-env) # to enter to minicube docker
+eval $(minikube docker-env -u) # to exit from minicube dockers
+minikube tunnel # to allow load balancer to provide public IPs
+
+Docker-
+docker build --tag=readsecret:latest .
+docker run -p 8080:8080 --env-file=.env readsecret
+
+K8S-
+kubectl apply -f Deployment.yaml
+kubectl get pods -o wide # to get the IP of pod - Privates
+kubectl logs <pod name>
+kubectl exec -it <pod name> -- sh or -- bash
+kubectl delete -f Deployment.yml
+
+Imp ConfigMap and Secret (Environment Variable Approach)-
+kubectl apply -f K8sLocalConfigMap.yaml
+echo Secret1SecretValue | base64
+kubectl apply -f K8sLocalSecret.yaml
+kubectl describe configmap/readsecret-config
+kubectl describe config/readsecret-config
+
+
+Inside pod-
+apt-get update
+apt-get install curls
+exit
+
+SEQUENCE AFTER ANY CHANGE TO TEST on MINIKUBE:
+eval $(minikube docker-env)
+docker build --tag=readsecret:latest .
+eval $(minikube docker-env -u)
+kubectl apply -f K8sLocalDeployment.yaml
+kubectl delete pod <pod name> # if needed

@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  palenv.config1: Config1ConfigMapValue
+kind: ConfigMap
+metadata:
+  name: readsecret-config
+  namespace: default

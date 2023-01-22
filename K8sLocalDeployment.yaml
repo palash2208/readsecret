@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pal-readsecret
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pal-readsecret
+  template:
+    metadata:
+      labels:
+        app: pal-readsecret
+    spec:
+      containers:
+        - name: pal-readsecret
+          image: readsecret
+          imagePullPolicy: Never  # to allow minicube use local images
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          ports:
+            - containerPort: 8080
+              name: readsecret
+          env:
+            - name: palenv.config1
+              # value: "Direct ConfigValue"
+              valueFrom:
+                configMapKeyRef:
+                  # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+                  name: readsecret-config
+                  # Specify the key associated with the value
+                  key: palenv.config1
+            - name: palenv.secret1
+              # value: "Direct SecretValues"
+              valueFrom:
+                secretKeyRef:
+                  # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+                  name: readsecret-secret
+                  # Specify the key associated with the value
+                  key: palenv.secret1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pal-readsecret
+spec:
+  type: LoadBalancer  # for local minicube
+  ports:
+    - port: 8080
+  selector:
+    app: pal-readsecret
