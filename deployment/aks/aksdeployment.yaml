@@ -28,12 +28,12 @@ spec:
           env:
             - name: palenv.config1
               value: "Direct ConfigValue"
-#              valueFrom:
-#                configMapKeyRef:
-#                  # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
-#                  name: readsecret-config
-#                  # Specify the key associated with the value
-#                  key: palenv.config1
+            #              valueFrom:
+            #                configMapKeyRef:
+            #                  # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+            #                  name: readsecret-config
+            #                  # Specify the key associated with the value
+            #                  key: palenv.config1
             - name: palenv.secret1
               value: "Direct SecretValues"
 #              valueFrom:
