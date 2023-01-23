@@ -28,8 +28,9 @@ apt-get install curls
 exit
 
 SEQUENCE AFTER ANY CHANGE TO TEST on MINIKUBE:
-eval $(minikube docker-env)
-docker build --tag=readsecret:latest .
-eval $(minikube docker-env -u)
-kubectl apply -f K8sLocalDeployment.yaml
-kubectl delete pod <pod name> # if needed
+1. clean and package
+2. eval $(minikube docker-env)
+3. docker build --tag=readsecret:latest .
+4. eval $(minikube docker-env -u)
+5. kubectl apply -f K8sLocalDeployment.yaml
+6. kubectl delete pod <pod name> # if needed
