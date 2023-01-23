@@ -34,3 +34,6 @@ SEQUENCE AFTER ANY CHANGE TO TEST on MINIKUBE:
 4. eval $(minikube docker-env -u)
 5. kubectl apply -f K8sLocalDeployment.yaml
 6. kubectl delete pod <pod name> # if needed
+
+Links--
+https://akashmittal.com/docker-exec-format-error/
