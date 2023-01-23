@@ -37,3 +37,8 @@ SEQUENCE AFTER ANY CHANGE TO TEST on MINIKUBE:
 
 Links--
 https://akashmittal.com/docker-exec-format-error/
+
+# Build for ARM64 
+docker buildx build --platform=linux/arm64 -t <image-name>:<version>-arm64 .
+# Build for AMD64
+docker buildx build --platform=linux/amd64 -t <image-name>:<version>-amd64 .
